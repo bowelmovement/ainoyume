@@ -1,0 +1,94 @@
+img.button 
+{
+	background: #ffffff;
+	border: 3px solid #B0B0B0;
+	padding: 1px;
+}
+
+p, div
+{	
+	font-family: trebuchet ms, arial, verdana;	
+	font-size: 11px;
+	line-height: 19px;
+	text-indent: 20px;
+}
+
+p.comment
+{
+	text-indent: 40px;
+	color: #6EADE2;
+	font: italic 20px trebuchet ms, arial, georgia;
+	letter-spacing: 3px;
+	margin: 30px 0 5px 0;
+	padding-left: 40px;
+}
+
+table 
+{
+	width: 555px;
+	background-color: #fff;
+}
+
+td
+{
+	font-family: trebuchet ms, arial, verdana;	
+	font-size: 11px;
+	line-height: 19px;
+	vertical-align: top;
+}
+
+td.bg
+{
+	background:url(http://ainoyume.net/images/linksbg.jpg) #E4E2EC repeat-y;
+	padding: 5px;
+	text-align: center;
+}
+
+td.bg2
+{
+	background:url(http://ainoyume.net/images/links3.jpg) #E4E2EC no-repeat;
+	padding: 5px;
+}
+
+td.siblings
+{
+	background-color: #E4E2EC;
+	padding: 5px;
+}
+
+a 
+{
+	color:#589458;
+	text-decoration: none;
+ 	font-weight: bold;
+ 	font-size: 11px;
+}
+
+a:hover 
+{
+	color: #ffffff;
+	background-color:#DEC2F0;
+}
+
+b
+{
+	background-color:#FCFAC4;
+}
+
+u
+{
+	text-decoration: none;
+	text-indent: 30px;
+	color: #6EADE2;
+	font: italic 20px trebuchet ms, verdana, arial, georgia;
+	letter-spacing: 3px;
+	margin: 0 0 0 0;
+	padding-left: 40px;
+}
+
+body
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background: url(http://ainoyume.net/images/linksstripbg.gif) #c0c0c0;
+}

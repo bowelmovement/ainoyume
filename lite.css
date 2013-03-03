@@ -1,0 +1,18 @@
+p, td, a, center, div {
+	font-family: Trebuchet MS, arial, tahoma, verdana;
+	font-size: 11px;
+	line-height: 19px;
+}
+a {
+	color: #C00000; 
+	text-decoration: none; 
+	font-weight:none; 
+	font-family: Trebuchet MS, verdana, arial, tahoma; 
+	font-size: 11px;
+}
+
+a:hover {
+	color: #fad4aa; 
+	cursor:crosshair; 
+	border-bottom: 1 dashed #000000;
+}
