@@ -1,0 +1,3 @@
+[submodule "vendor/polymer-all"]
+	path = vendor/polymer-all
+	url = https://github.com/peterwmwong/polymer-all.git

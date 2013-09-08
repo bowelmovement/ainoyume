@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title
+      | ioi tests
+    meta charset="UTF-8"
+    link rel="stylesheet" href="../../vendor/polymer-tools-test/mocha/mocha.css"
+    script src="../../vendor/polymer-tools-test/mocha/mocha.js"
+    script src="../../vendor/polymer-tools-test/chai/chai.js"
+    script src="../../vendor/polymer-tools-test/mocha-htmltest.js"
+
+  body
+    #mocha
+
+    / Setup test environment
+    coffee:
+      mocha.setup
+        ui: 'tdd'
+        slow: 1000
+        htmlbase: ''
+
+    / Gather Test Suites
+    == generate_html_test_suites
+
+    / Add livereload
+    coffee:
+      document.write "<script src='http://#{(location.host || 'localhost').split(':')[0]}:35729/livereload.js?snipver=1'></"+"script>"
+
+    / Run tests
+    coffee:
+      mocha.run()

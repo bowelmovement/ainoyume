@@ -1,0 +1,95 @@
+polymer-element name="v-app"
+  template
+    link rel="stylesheet" href="v-app.css"
+
+    .wrap class="{{'scene'+sceneIndex}}"
+
+      .btn.left on-click="onPrevScene"
+        | &lt;
+
+      .btn.right on-click="onNextScene"
+        | &gt;
+
+      #world data-limit-y="0" data-scalar-x="10" data-friction-x=".1"
+        .layer data-depth="1.00"
+
+          .correctiveLayer
+            // Spring
+            img.scene src="/src/images/land1.svg"
+
+            // Summer
+            img.scene src="/src/images/land2.svg"
+
+            // Autumn
+            img.scene src="/src/images/land3.svg"
+
+            // Winter
+            img.scene src="/src/images/land2.svg"
+        
+        .layer data-depth="0.20"
+          // Spring
+          img.scene src="/src/images/land2.svg"
+
+          // Summer
+          img.scene src="/src/images/land3.svg"
+
+          // Autumn
+          img.scene src="/src/images/land1.svg"
+
+          // Winter
+          img.scene src="/src/images/land3.svg"
+
+        .layer data-depth="0.1"
+          // Spring
+          img.scene src="/src/images/land2.svg"
+
+          // Summer
+          img.scene src="/src/images/land1.svg"
+
+          // Autumn
+          img.scene src="/src/images/land3.svg"
+
+          // Winter
+          img.scene src="/src/images/land1.svg"
+
+  coffee:
+    Polymer 'v-app',
+
+      sceneIndex: 0
+
+      onNextScene: -> @sceneIndex = Math.min(@sceneIndex+1, 3)
+      onPrevScene: -> @sceneIndex = Math.max(@sceneIndex-1, 0)
+
+      ready: ->
+        @asyncMethod ->
+          $world = @$.world
+
+          ###
+          Correct Parallax.JS calculations
+          --------------------------------
+
+          Parallax.JS determines the parallax effect based on mouse position in
+          the window.  BUT, in our case, the parallax effect should be based 
+          around the scene (4x larger than the window).  So the calculation
+          should be based on...
+            1. Mouse position in relation to the scene (not window)
+            2. Width of the scene (not window)
+          ###
+          oldUpdateDimensions = Parallax::updateDimensions
+          Parallax::updateDimensions = ->
+            oldUpdateDimensions.call @
+            @ww = window.innerWidth*4
+            @hw = @ww / 2
+            return
+
+          Parallax.prototype.onMouseMove = (event)->
+            @ix = ($world.impl.scrollLeft + event.pageX - @hw) / @hw
+            @iy = (event.pageY - @hh) / @hh
+            return
+
+          parallax = new Parallax @$.world
+          PathObserver.defineProperty parallax, 'sceneIndex',
+            object: @
+            path:'sceneIndex'
+
+          return

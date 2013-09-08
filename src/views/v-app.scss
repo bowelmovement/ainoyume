@@ -1,0 +1,134 @@
+@import 'transform';
+
+@host {
+  * {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  transition: background 500ms;
+  background: #FFF;
+
+  &.scene0 {
+    > .left {
+      visibility: hidden;
+    }
+  }
+
+  &.scene1 {
+    background: #F00;
+  }
+
+  &.scene3 {
+    > .right {
+      visibility: hidden;
+    }
+  }
+
+  > .btn {
+    $btn-radius: 75px;
+
+    display: inline-block;
+    position: absolute;
+    top: 40%;
+    margin: 0 $btn-radius/2;
+    z-index: 2;
+
+    width: $btn-radius;
+    line-height: $btn-radius;
+
+    border-radius: $btn-radius/2;
+    
+    font-size: $btn-radius/2;
+    font-weight: bold;
+    text-align: center;
+
+    color: white;
+    background-color: black;
+    opacity: .05;
+
+    cursor: pointer;
+
+    &:hover {
+      opacity: .15;
+    }
+
+    &.right {
+      right: 0;
+    }
+  }
+
+  #world {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    z-index: 1;
+
+    > .layer {
+      position: relative;
+      width: 400% !important;
+      height: 100%;
+
+      .correctiveLayer {
+        position: absolute;
+        top: 0px;
+        bottom: -20px;
+        left: -10%;
+        right: -10%;
+        overflow: none;
+      }
+
+      &:before, .correctiveLayer:before {
+        content: ' ';
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        background-color: #0F0;
+      }
+
+      .scene {
+        display: inline-block;
+        vertical-align: bottom;
+        width: 24.9%;
+        height: auto;
+      }
+
+      &:nth-child(1) {
+        opacity: 1;
+
+        .scene {
+          @include transform(translateY(0) scale(1))
+        }
+      }
+
+      &:nth-child(2) {
+        opacity: .5;
+
+        .scene {
+          @include transform(translateY(-30px) scale(1))
+        }
+      }
+
+      &:nth-child(3) {
+        opacity: 0.25;
+
+        .scene {
+          @include transform(translateY(-50px) scale(.75))
+        }
+      }
+    }
+  }
+}
