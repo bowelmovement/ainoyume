@@ -1,4 +1,5 @@
 @import 'transform';
+@import 'gradient';
 
 @host {
   * {
@@ -16,20 +17,27 @@
   height: 100%;
   overflow: hidden;
   z-index: 1;
-  transition: background 500ms;
-  background: #FFF;
 
-  &.scene0 {
+  &.scene--summer {
+    @include gradient(rgb(213,246,233), rgb(255,253,136));
     > .left {
       visibility: hidden;
     }
   }
 
-  &.scene1 {
-    background: #F00;
+  &.scene--autumn {
+    @include gradient(#FFF, #FF0);
   }
 
-  &.scene3 {
+  &.scene--autumn {
+    @include gradient(#FFF, #0FF);
+  }
+
+  &.scene--winter {
+    @include gradient(#FFF, #F0F);
+  }
+
+  &.scene--spring {
     > .right {
       visibility: hidden;
     }
@@ -82,52 +90,40 @@
       width: 400% !important;
       height: 100%;
 
-      .correctiveLayer {
+      .scene {
+        display: inline-block;
+        width: 24.9%;
+        height: 100%;
+        position: relative;
+
+        > .el {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: auto;
+
+          // TODO: replace with full mountain image
+          &.bg-mountains {
+            bottom: 20px;
+          }
+
+          &.tree {
+            bottom: -10px;
+          }
+        }
+      }
+
+      // This "magnifies" foreground layers so that you can't see beyound the
+      // bounds of that layer.  10% is based on the amount of parallax effect
+      // set in v-app data-scalar-x on the world.
+      > .correctiveLayer {
         position: absolute;
-        top: 0px;
-        bottom: -20px;
+        top: 0;
+        bottom: 0;
         left: -10%;
         right: -10%;
         overflow: none;
-      }
-
-      &:before, .correctiveLayer:before {
-        content: ' ';
-        display: inline-block;
-        width: 0;
-        height: 100%;
-        background-color: #0F0;
-      }
-
-      .scene {
-        display: inline-block;
-        vertical-align: bottom;
-        width: 24.9%;
-        height: auto;
-      }
-
-      &:nth-child(1) {
-        opacity: 1;
-
-        .scene {
-          @include transform(translateY(0) scale(1))
-        }
-      }
-
-      &:nth-child(2) {
-        opacity: .5;
-
-        .scene {
-          @include transform(translateY(-30px) scale(1))
-        }
-      }
-
-      &:nth-child(3) {
-        opacity: 0.25;
-
-        .scene {
-          @include transform(translateY(-50px) scale(.75))
-        }
       }
     }
   }
